@@ -24,7 +24,11 @@ module.exports = function(grunt) {
           port: 9001,
           base: 'public',
           keepalive: true,
-          hostname: "*"
+          hostname: "*",
+          open: {
+            target: '127.0.0.1:9001', // target url to open
+          },
+          livereload: 9000
         }
       }
     },
@@ -49,6 +53,11 @@ module.exports = function(grunt) {
       },
     },
     watch: {
+      options: {
+        livereload: {
+          port: 9000
+        }
+      },
       scripts: {
         files: ['src/javascripts/**/*.js'],
         tasks: ['copy'],
