@@ -4,6 +4,7 @@ A grunt skeleton useful for quickly prototyping ideas
 
 ## File structure ##
 All code in `src/styles/main.scss` is exported into `public/styles/main.css` with any includes
+
 All code in `javascripts/app.js` is exported to the same folder structure in the `public/` folder
 
 ## To run ##
