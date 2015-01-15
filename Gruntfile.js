@@ -23,8 +23,43 @@ module.exports = function(grunt) {
         options: {
           port: 9001,
           base: 'public',
-          keepalive: true
+          keepalive: true,
+          hostname: "*"
         }
+      }
+    },
+    copy: {
+      js: {
+        expand: true,
+        cwd: 'src/javascripts',
+        src: '**',
+        dest: 'public/javascripts',
+        flatten: false,
+        filter: 'isFile',
+      },
+    },
+    clean: {
+      public: ["public/"]
+    },
+    uglify: {
+      js: {
+        files: {
+          'public/javascripts/app.min.js': ['public/javascripts/app.js']
+        }
+      },
+    },
+    watch: {
+      scripts: {
+        files: ['src/javascripts/**/*.js'],
+        tasks: ['copy'],
+      },
+      scss: {
+        files: ['src/styles/**/*.scss'],
+        tasks: ['compass'],
+      },
+      haml: {
+        files: ["src/index.haml"],
+        tasks: ['haml']
       }
     }
   });
@@ -33,8 +68,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-haml');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task(s).
-  grunt.registerTask('default', ['haml', 'compass', 'connect']);
+  grunt.registerTask('default', ['clean:public', 'haml', 'compass', 'copy', 'watch']);
 
 };
