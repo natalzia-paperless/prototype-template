@@ -3,21 +3,38 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    uglify: {
-      options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+    haml: {
+      dist: {                            // Target
+        files: {                         // Dictionary of files
+          'public/index.html': 'src/index.haml'
+        }
       },
-      build: {
-        src: 'src/<%= pkg.name %>.js',
-        dest: 'build/<%= pkg.name %>.min.js'
+    },
+    compass: {                  // Task
+      dist: {                   // Target
+        options: {              // Target options
+          sassDir: 'src/styles',
+          cssDir: 'public/styles'
+        }
+      }
+    },
+    connect: {
+      server: {
+        options: {
+          port: 9001,
+          base: 'public',
+          keepalive: true
+        }
       }
     }
   });
 
-  // Load the plugin that provides the "uglify" task.
-  grunt.loadNpmTasks('grunt-contrib-uglify');
+  // Load the plugins
+  grunt.loadNpmTasks('grunt-haml');
+  grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-contrib-connect');
 
   // Default task(s).
-  grunt.registerTask('default', ['uglify']);
+  grunt.registerTask('default', ['haml', 'compass', 'connect']);
 
 };
