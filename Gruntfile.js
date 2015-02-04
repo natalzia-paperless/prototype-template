@@ -39,7 +39,7 @@ module.exports = function(grunt) {
         src: '**',
         dest: 'public/javascripts',
         flatten: false,
-        filter: 'isFile',
+        filter: 'isFile'
       },
     },
     clean: {
@@ -60,11 +60,11 @@ module.exports = function(grunt) {
       },
       scripts: {
         files: ['src/javascripts/**/*.js'],
-        tasks: ['copy'],
+        tasks: ['copy']
       },
       scss: {
         files: ['src/styles/**/*.scss'],
-        tasks: ['compass'],
+        tasks: ['compass']
       },
       haml: {
         files: ["src/index.haml"],
