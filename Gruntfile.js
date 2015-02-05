@@ -3,10 +3,10 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    haml: {
+    jade: {
       dist: {                            // Target
         files: {                         // Dictionary of files
-          'public/index.html': 'src/index.haml'
+          'public/index.html': 'src/index.jade'
         }
       },
     },
@@ -66,15 +66,15 @@ module.exports = function(grunt) {
         files: ['src/styles/**/*.scss'],
         tasks: ['compass']
       },
-      haml: {
-        files: ["src/index.haml"],
-        tasks: ['haml']
+      jade: {
+        files: ["src/index.jade"],
+        tasks: ['jade']
       }
     }
   });
 
   // Load the plugins
-  grunt.loadNpmTasks('grunt-haml');
+  grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -83,6 +83,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task(s).
-  grunt.registerTask('default', ['clean:public', 'haml', 'compass', 'copy', 'watch']);
+  grunt.registerTask('default', ['clean:public', 'jade', 'compass', 'copy', 'watch']);
 
 };
